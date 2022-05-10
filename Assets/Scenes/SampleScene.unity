@@ -791,11 +791,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a3685b39e96d5014f91e1a0c1adbc88c, type: 3}
   m_PlayOnAwake: 1
-<<<<<<< Updated upstream
   m_Volume: 0.027
-=======
-  m_Volume: 0.589
->>>>>>> Stashed changes
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1197,13 +1193,8 @@ MonoBehaviour:
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
   m_ShapePathHash: 0
-<<<<<<< Updated upstream
   m_Mesh: {fileID: 1958034627}
   m_InstanceId: 24236
-=======
-  m_Mesh: {fileID: 56397511}
-  m_InstanceId: 34484
->>>>>>> Stashed changes
 --- !u!114 &584760972
 MonoBehaviour:
   m_ObjectHideFlags: 0
