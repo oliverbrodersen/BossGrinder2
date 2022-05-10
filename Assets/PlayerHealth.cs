@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
 {
     public static event Action OnPlayerDamage;
     public static event Action OnPlayerDeath;
+    public Death Death;
+
 
     public int Health, MaxHealth;
 
@@ -24,7 +26,9 @@ public class PlayerHealth : MonoBehaviour
         {
             Health = 0;
             Debug.Log("Death");
+            Death.Setup();
             OnPlayerDeath?.Invoke();
+            Destroy(gameObject);
         }
     }
 }
