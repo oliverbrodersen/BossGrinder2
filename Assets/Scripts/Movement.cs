@@ -17,7 +17,6 @@ public class Movement : MonoBehaviour
     Vector2 mousePosition;
 
     public Tilemap tilemap;
-    bool generate = false;
 
     public float DashSpeed;
     public float DashCooldown;

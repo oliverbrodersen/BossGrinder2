@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5005370767210710359}
   - component: {fileID: 5005370767210710358}
   - component: {fileID: 5005370767210710353}
+  - component: {fileID: 8883335405807475760}
+  - component: {fileID: 5265957275313811560}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -107,7 +109,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5005370767210710358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +150,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.25}
   m_EdgeRadius: 0
+--- !u!114 &8883335405807475760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5005370767210710362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d9489c9ef49eb4dbf10c5b2bd57fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 4
+  Rb: {fileID: 5005370767210710359}
+  Sr: {fileID: 5005370767210710357}
+  MovementPattern: 1
+--- !u!114 &5265957275313811560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5005370767210710362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7016f22c09496d44894887f1385d9ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 5337493514331954194, guid: a0aedee9d343e4441832597ba6802e5e, type: 3}
+  ProjectileSpeed: 9
+  AttackCooldown: 1

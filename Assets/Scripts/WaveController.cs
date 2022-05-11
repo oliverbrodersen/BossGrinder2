@@ -8,6 +8,7 @@ public class WaveController : MonoBehaviour
     public Text waveText;
     public Text enemiesText;
     public GameObject enemy;
+    public GameObject skeleton;
     public SpriteRenderer spawnBox;
     public int wave;
     private bool _waveStarted = true;
@@ -61,7 +62,14 @@ public class WaveController : MonoBehaviour
     {
         for (int i = 0; i < wave; i++)
         {
-            var newEnemy = Instantiate(enemy, RandomPointInBounds(spawnBox.bounds), Quaternion.identity);
+            if (Random.value >= 0.5)
+            {
+                var newEnemy = Instantiate(enemy, RandomPointInBounds(spawnBox.bounds), Quaternion.identity);
+            }
+            else
+            {
+                var newEnemy = Instantiate(skeleton, RandomPointInBounds(spawnBox.bounds), Quaternion.identity);
+            }
         }
         _waveStarted = true;
     }
