@@ -10,6 +10,7 @@ public class WaveController : MonoBehaviour
     public GameObject enemy;
     public SpriteRenderer spawnBox;
     public int wave;
+    private bool _waveStarted = true;
 
     void Start()
     {
@@ -21,16 +22,28 @@ public class WaveController : MonoBehaviour
         // if not spawn the next wave
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if(wave == 0){
-            enemiesText.text = "Kill boss to start wave 1";
+                waveText.text = "Boss Grinder";
+            enemiesText.text = "Kill skeleton to start wave 1";
         }
         else{
-            enemiesText.text =  enemies.Length + (enemies.Length == 1 ? " boss" : " bosses") + " remaining";
+            if(_waveStarted){
+                enemiesText.text =  enemies.Length + (enemies.Length == 1 ? " boss" : " bosses") + " remaining";
+            }
+            else{
+                enemiesText.text =  wave + (wave == 1 ? " boss" : " bosses") + " spawning";
+            }
         }
         if (enemies.Length == 0)
         {
-            wave++;
-            waveText.text = "Wave " + wave.ToString();
-            SpawnWave();
+            if(_waveStarted){
+                _waveStarted = false;
+                FindObjectOfType<AudioManager>().Play("start_wave");
+                wave++;
+                waveText.text = "Wave " + wave.ToString();
+                
+                //Dramatic effect
+                Invoke("SpawnWave", 2);
+            }
         }
 
     }
@@ -50,6 +63,7 @@ public class WaveController : MonoBehaviour
         {
             var newEnemy = Instantiate(enemy, RandomPointInBounds(spawnBox.bounds), Quaternion.identity);
         }
+        _waveStarted = true;
     }
 
     private void ClearWave(){
@@ -58,14 +72,15 @@ public class WaveController : MonoBehaviour
         {
             Destroy(enemy);
         }
+        _waveStarted = false;
     }
 
     public void StartWaves()
     {
-        wave = 1;
-        waveText.gameObject.SetActive(true);
-        waveText.text = "Wave " + wave.ToString();
         ClearWave();
+        wave = 0;
+        _waveStarted = true;
+        waveText.text = "Wave " + wave.ToString();
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemiesText.text =  enemies.Length + (enemies.Length == 1 ? " boss" : " bosses") + " remaining";
     }

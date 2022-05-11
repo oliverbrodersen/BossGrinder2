@@ -18,12 +18,15 @@ public class Death : MonoBehaviour
     public void Setup(){
         gameObject.SetActive(true);
         waveText.text = "Wave " + WaveController.wave.ToString();
+        FindObjectOfType<AudioManager>().Play("game_over");
     }
 
     public void Restart(){
         gameObject.SetActive(false);
         PlayerHealth playerHealth = Player.GetComponent<PlayerHealth>();
         playerHealth.Health = playerHealth.MaxHealth;
+        Player.GetComponent<Movement>().speed = 8f;
+        Player.transform.position = new Vector3(0,0,0);
         WaveController.StartWaves();
     }
 }

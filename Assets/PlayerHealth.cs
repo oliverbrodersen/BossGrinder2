@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("Death");
             Death.Setup();
             OnPlayerDeath?.Invoke();
-            Destroy(gameObject);
+            gameObject.GetComponent<Movement>().speed = 0f;
         }
     }
 }
