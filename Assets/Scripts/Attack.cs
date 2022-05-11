@@ -5,13 +5,18 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     public Transform Origin;
-    public GameObject Knife;
-    public GameObject Fireball;
     public Camera Camera;
-    public float projectileSpeed;
-    public float attackCooldown;
 
-    private float nextAttack = 0;
+    public GameObject Knife;
+    public float KnifeSpeed;
+    public float KnifeCooldown;
+    private float NextKnifeAttack = 0;
+
+    public GameObject Fireball;
+    public float FireballSpeed;
+    public float FireballCooldown;
+    private float NextFireballAttack = 0;
+
 
     Vector2 mousePosition;
 
@@ -19,14 +24,14 @@ public class Attack : MonoBehaviour
     void Update()
     {
         mousePosition = Camera.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetButtonDown("Fire1") && nextAttack < Time.time)
+        if (Input.GetButtonDown("Fire1") && NextKnifeAttack < Time.time)
         {
-            nextAttack = Time.time + attackCooldown;
+            NextKnifeAttack = Time.time + KnifeCooldown;
             Shoot();
         }
-        if (Input.GetButtonDown("Fire2") && nextAttack < Time.time)
+        if (Input.GetButtonDown("Fire2") && NextFireballAttack < Time.time)
         {
-            nextAttack = Time.time + attackCooldown;
+            NextFireballAttack = Time.time + FireballCooldown;
             ThrowFireball();
         }
     }
@@ -41,7 +46,7 @@ public class Attack : MonoBehaviour
         knife.GetComponent<ProjectileCollide>().damage = 1;
 
         var rigidbody = knife.GetComponent<Rigidbody2D>();
-        rigidbody.AddForce(delta * projectileSpeed, ForceMode2D.Impulse);
+        rigidbody.AddForce(delta * KnifeSpeed, ForceMode2D.Impulse);
     }
 
     void ThrowFireball()
@@ -54,7 +59,7 @@ public class Attack : MonoBehaviour
         fireball.GetComponent<ProjectileCollide>().damage = 3;
 
         var rigidbody = fireball.GetComponent<Rigidbody2D>();
-        rigidbody.AddForce(delta * projectileSpeed, ForceMode2D.Impulse);
+        rigidbody.AddForce(delta * FireballSpeed, ForceMode2D.Impulse);
     }
 
 }

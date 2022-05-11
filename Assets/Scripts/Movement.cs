@@ -19,6 +19,12 @@ public class Movement : MonoBehaviour
     public Tilemap tilemap;
     bool generate = false;
 
+    public float DashSpeed;
+    public float DashCooldown;
+    public float DashDuration;
+    private float DashEnd = 0;
+    private float NextDash = 0;
+
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -27,9 +33,10 @@ public class Movement : MonoBehaviour
 
         mousePosition = cam.ScreenToViewportPoint(Input.mousePosition);
 
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.Space) && NextDash < Time.time)
         {
-            generate = true;
+            DashEnd = Time.time + DashDuration;
+            NextDash = Time.time + DashCooldown;
         }
 
     }
@@ -37,7 +44,8 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         // Move player
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        var movespeed = (Time.time > DashEnd) ? speed : DashSpeed;
+        rb.MovePosition(rb.position + movement * movespeed * Time.fixedDeltaTime);
 
         // Make player face movement direction
         if (movement.x > 0)
@@ -55,13 +63,6 @@ public class Movement : MonoBehaviour
         // Calculate aim direction
         var delta = mousePosition - rb.position;
         var angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
-
-        if (generate)
-        {
-            generate = false;
-
-        }
-
     }
 
 }
