@@ -58,18 +58,50 @@ public class WaveController : MonoBehaviour
         );
     }
 
+    private Vector3 RandomPointoOnBoundsEdge(Bounds bounds)
+    {
+        var side = (int)(Random.value * 3);
+        switch (side)
+        {
+            case 0:
+                return new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                bounds.max.y,
+                Random.Range(bounds.min.z, bounds.max.z));
+            case 1:
+                return new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                bounds.max.y,
+                Random.Range(bounds.min.z, bounds.max.z));
+            case 2:
+                return new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                bounds.max.y,
+                Random.Range(bounds.min.z, bounds.max.z));
+            case 3:
+                return new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                bounds.max.y,
+                Random.Range(bounds.min.z, bounds.max.z));
+            default:
+                throw new System.Exception("A square has 4 sides. how did we end up here?");
+        }
+
+        //return new Vector3(
+        //    Random.Range(bounds.min.x, bounds.max.x),
+        //    Random.Range(bounds.min.y, bounds.max.y),
+        //    Random.Range(bounds.min.z, bounds.max.z));
+    }
+
     private void SpawnWave()
     {
         for (int i = 0; i < wave; i++)
         {
-            if (Random.value >= 0.5)
-            {
-                var newEnemy = Instantiate(enemy, RandomPointInBounds(spawnBox.bounds), Quaternion.identity);
-            }
-            else
-            {
-                var newEnemy = Instantiate(skeleton, RandomPointInBounds(spawnBox.bounds), Quaternion.identity);
-            }
+            var enemyType = (Random.value >= 0.5) ? enemy : skeleton;
+            var newEnemy = Instantiate(enemyType, RandomPointoOnBoundsEdge(spawnBox.bounds), Quaternion.identity);
+
+            // Add a random delay to the attack, as not to attack at the same time as all other enemies
+            newEnemy.GetComponent<EnemyAttack>().SetNextAttack(Time.time + Random.value * 1);
         }
         _waveStarted = true;
     }

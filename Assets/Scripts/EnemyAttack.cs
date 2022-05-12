@@ -16,6 +16,11 @@ public class EnemyAttack : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    public void SetNextAttack(float time)
+    {
+        nextAttack = time;
+    }
+
     // Update is called once per frame
     void Update()
     {

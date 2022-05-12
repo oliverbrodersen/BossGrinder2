@@ -13,6 +13,9 @@ public class ProjectileCollide : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Projectile")
+            return;
+
         if (collision.gameObject.name == "Dragon")
             return;
 

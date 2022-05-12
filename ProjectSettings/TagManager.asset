@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - WaveController
+  - Potion
+  - Projectile
   layers:
   - Default
   - TransparentFX
