@@ -9,6 +9,7 @@ public class WaveController : MonoBehaviour
     public Text enemiesText;
     public GameObject enemy;
     public GameObject skeleton;
+    public GameObject boss;
     public SpriteRenderer spawnBox;
     public int wave;
     private bool _waveStarted = true;
@@ -95,13 +96,24 @@ public class WaveController : MonoBehaviour
 
     private void SpawnWave()
     {
-        for (int i = 0; i < wave; i++)
+        if (wave % 3 == 0)
         {
-            var enemyType = (Random.value >= 0.5) ? enemy : skeleton;
-            var newEnemy = Instantiate(enemyType, RandomPointoOnBoundsEdge(spawnBox.bounds), Quaternion.identity);
-
             // Add a random delay to the attack, as not to attack at the same time as all other enemies
-            newEnemy.GetComponent<EnemyAttack>().SetNextAttack(Time.time + Random.value * 1);
+            var newEnemy = Instantiate(boss, RandomPointoOnBoundsEdge(spawnBox.bounds), Quaternion.identity);
+            newEnemy.GetComponent<EnemyAttack>().SetNextAttack(Time.time + 1 + Random.value * 1);
+        }
+        else
+        {
+            // Cap enemies at 5
+            var enemyCount = wave > 5 ? 5 : wave;
+            for (int i = 0; i < enemyCount; i++)
+            {
+                var enemyType = (Random.value >= 0.5) ? enemy : skeleton;
+                var newEnemy = Instantiate(enemyType, RandomPointoOnBoundsEdge(spawnBox.bounds), Quaternion.identity);
+
+                // Add a random delay to the attack, as not to attack at the same time as all other enemies
+                newEnemy.GetComponent<EnemyAttack>().SetNextAttack(Time.time + 1 + Random.value * 1);
+            }
         }
         _waveStarted = true;
     }
