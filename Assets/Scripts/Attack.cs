@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Attack : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class Attack : MonoBehaviour
     public float KnifeCooldown;
     private float NextKnifeAttack = 0;
 
+    public GameObject KnifeImage;
+
     public GameObject Fireball;
     public float FireballSpeed;
     public float FireballCooldown;
     private float NextFireballAttack = 0;
-
+    public GameObject FireballImage;
 
     Vector2 mousePosition;
 
@@ -24,15 +27,23 @@ public class Attack : MonoBehaviour
     void Update()
     {
         mousePosition = Camera.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetButtonDown("Fire1") && NextKnifeAttack < Time.time)
+        if (NextKnifeAttack < Time.time)
         {
-            NextKnifeAttack = Time.time + KnifeCooldown;
-            Shoot();
+            KnifeImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+            if(Input.GetButtonDown("Fire1")){
+                NextKnifeAttack = Time.time + KnifeCooldown;
+                KnifeImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.2f);
+                Shoot();
+            }
         }
-        if (Input.GetButtonDown("Fire2") && NextFireballAttack < Time.time)
+        if (NextFireballAttack < Time.time)
         {
-            NextFireballAttack = Time.time + FireballCooldown;
-            ThrowFireball();
+            FireballImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+            if(Input.GetButtonDown("Fire2")){
+                NextFireballAttack = Time.time + FireballCooldown;
+                FireballImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.2f);
+                ThrowFireball();
+            }
         }
     }
 

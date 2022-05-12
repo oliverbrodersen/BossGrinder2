@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
 public class Movement : MonoBehaviour
@@ -24,6 +25,8 @@ public class Movement : MonoBehaviour
     private float DashEnd = 0;
     private float NextDash = 0;
 
+    public GameObject DashIcon;
+
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -32,10 +35,15 @@ public class Movement : MonoBehaviour
 
         mousePosition = cam.ScreenToViewportPoint(Input.mousePosition);
 
-        if (Input.GetKeyDown(KeyCode.Space) && NextDash < Time.time)
+        if (NextDash < Time.time)
         {
-            DashEnd = Time.time + DashDuration;
-            NextDash = Time.time + DashCooldown;
+            DashIcon.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+            if(Input.GetKeyDown(KeyCode.Space)){
+                DashIcon.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.2f);
+                FindObjectOfType<AudioManager>().Play("dash");
+                DashEnd = Time.time + DashDuration;
+                NextDash = Time.time + DashCooldown;
+            }
         }
 
     }
