@@ -25,7 +25,14 @@ public class Movement : MonoBehaviour
     private float DashEnd = 0;
     private float NextDash = 0;
 
+    private float SpeedBoostEnd = 0;
+
     public GameObject DashIcon;
+
+    public void GrantSpeedBoost()
+    {
+        SpeedBoostEnd = Time.time + 5;
+    }
 
     void Update()
     {
@@ -52,6 +59,9 @@ public class Movement : MonoBehaviour
     {
         // Move player
         var movespeed = (Time.time > DashEnd) ? speed : DashSpeed;
+        if (Time.time < SpeedBoostEnd)
+            movespeed = DashSpeed;
+
         rb.MovePosition(rb.position + movement * movespeed * Time.fixedDeltaTime);
 
         // Make player face movement direction
