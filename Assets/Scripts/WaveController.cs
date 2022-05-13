@@ -112,8 +112,22 @@ public class WaveController : MonoBehaviour
         if (wave % 3 == 0)
         {
             // Add a random delay to the attack, as not to attack at the same time as all other enemies
-            var newEnemy = Instantiate(boss, RandomPointoOnBoundsEdge(spawnBox.bounds), Quaternion.identity);
-            newEnemy.GetComponent<EnemyAttack>().SetNextAttack(Time.time + 1 + Random.value * 1);
+            var newBoss = Instantiate(boss, RandomPointoOnBoundsEdge(spawnBox.bounds), Quaternion.identity);
+            newBoss.GetComponent<EnemyAttack>().SetNextAttack(Time.time + 1 + Random.value * 1);
+
+            // Cap enemies at wave / 3
+            var enemyCount = (wave - 1) / 3;
+            if (enemyCount > 3)
+                enemyCount = 3;
+
+            for (int i = 0; i < enemyCount; i++)
+            {
+                var enemyType = (Random.value >= 0.5) ? enemy : skeleton;
+                var newEnemy = Instantiate(enemyType, RandomPointoOnBoundsEdge(spawnBox.bounds), Quaternion.identity);
+
+                // Add a random delay to the attack, as not to attack at the same time as all other enemies
+                newEnemy.GetComponent<EnemyAttack>().SetNextAttack(Time.time + 1 + Random.value * 1);
+            }
         }
         else
         {
