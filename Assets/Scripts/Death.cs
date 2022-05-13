@@ -9,6 +9,8 @@ public class Death : MonoBehaviour
     public GameObject Player;
     public WaveController WaveController;
 
+    private bool _gameOver;
+
     private void OnEnable()
     {
         PlayerHealth playerHealth = Player.GetComponent<PlayerHealth>();
@@ -16,12 +18,16 @@ public class Death : MonoBehaviour
     }
     
     public void Setup(){
-        gameObject.SetActive(true);
-        waveText.text = "Wave " + WaveController.wave.ToString();
-        FindObjectOfType<AudioManager>().Play("game_over");
+        if(!_gameOver){
+            _gameOver = true;
+            gameObject.SetActive(true);
+            waveText.text = "Wave " + WaveController.wave.ToString();
+            FindObjectOfType<AudioManager>().Play("game_over");
+        }
     }
 
     public void Restart(){
+        _gameOver = false;
         gameObject.SetActive(false);
         PlayerHealth playerHealth = Player.GetComponent<PlayerHealth>();
         playerHealth.Health = playerHealth.MaxHealth;

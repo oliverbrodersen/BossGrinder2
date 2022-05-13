@@ -122,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.007589698, y: -0.018973902}
+  m_Offset: {x: 0.0005071163, y: 0.059565544}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48391032, y: 0.9620522}
+  m_Size: {x: 0.12764883, y: 0.8762255}
   m_EdgeRadius: 0
 --- !u!82 &7395646914361349519
 AudioSource:
@@ -145,7 +145,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e8a917bd7666c154b8587a8068a0162d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b1af5882baf32224284087ab6b94361f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -245,3 +245,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   PlayerOwned: 0
+  Blood: {fileID: 2614871588024551516, guid: e6babca881ffa4a4eb50911546f9c143, type: 3}

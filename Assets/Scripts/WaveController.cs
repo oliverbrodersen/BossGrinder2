@@ -18,9 +18,14 @@ public class WaveController : MonoBehaviour
 
     private bool _waveStarted = true;
 
-    void Start()
+    public GameObject Player;
+
+    private void OnEnable()
     {
+        PlayerHealth playerHealth = Player.GetComponent<PlayerHealth>();
+        PlayerHealth.OnPlayerDeath += ClearWave;
     }
+    
 
     void Update()
     {
@@ -150,6 +155,11 @@ public class WaveController : MonoBehaviour
         foreach(var enemy in enemies)
         {
             Destroy(enemy);
+        }
+        var Loot = GameObject.FindGameObjectsWithTag("Loot");
+        foreach(var loot in Loot)
+        {
+            Destroy(loot);
         }
         _waveStarted = false;
     }
