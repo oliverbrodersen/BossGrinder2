@@ -12,6 +12,10 @@ public class WaveController : MonoBehaviour
     public GameObject boss;
     public SpriteRenderer spawnBox;
     public int wave;
+
+    public Transform ChestSpawn;
+    public Chest Chest;
+
     private bool _waveStarted = true;
 
     void Start()
@@ -32,7 +36,7 @@ public class WaveController : MonoBehaviour
                 enemiesText.text =  enemies.Length + (enemies.Length == 1 ? " boss" : " bosses") + " remaining";
             }
             else{
-                enemiesText.text =  wave + (wave == 1 ? " boss" : " bosses") + " spawning";
+                enemiesText.text =  "Spawning bosses";
             }
         }
         if (enemies.Length == 0)
@@ -42,12 +46,21 @@ public class WaveController : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("start_wave");
                 wave++;
                 waveText.text = "Wave " + wave.ToString();
-                
-                //Dramatic effect
-                Invoke("SpawnWave", 2);
+
+                if(wave > 1){
+                    SummonChest();
+                    Invoke("SpawnWave", 5);
+                }
+                else{
+                    Invoke("SpawnWave", 2);
+                }
             }
         }
 
+    }
+
+    private void SummonChest(){
+        Instantiate(Chest, ChestSpawn.position, Quaternion.Euler(new Vector3(0, 0, 0)));
     }
 
     private Vector3 RandomPointInBounds(Bounds bounds)

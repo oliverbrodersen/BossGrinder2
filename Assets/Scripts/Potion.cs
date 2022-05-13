@@ -21,6 +21,7 @@ public class Potion : MonoBehaviour
         if (collision.gameObject.name != "Player")
             return;
 
+        FindObjectOfType<AudioManager>().Play("drink");
         collision.gameObject.GetComponent<PlayerHealth>().Heal(8, true);
         Destroy(gameObject);
     }
