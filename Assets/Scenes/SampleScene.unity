@@ -727,8 +727,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireball: {fileID: 2868083523618131878, guid: 9a9e9eee4a21c1b4ea496320c7474459, type: 3}
-  fireballSpeed: 7
+  fireballSpeed: 10
   fireballCooldown: 1
+  waveController: {fileID: 447799300}
 --- !u!1 &298082315
 GameObject:
   m_ObjectHideFlags: 0

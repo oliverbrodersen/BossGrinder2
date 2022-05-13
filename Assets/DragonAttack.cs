@@ -9,11 +9,21 @@ public class DragonAttack : MonoBehaviour
     public float fireballCooldown;
     private float nextAttack;
 
+    public WaveController waveController;
+
+    private void Start()
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemies.Length == 0)
+            return;
+
+        if (waveController.wave == 0)
             return;
 
         if (nextAttack > Time.time)
