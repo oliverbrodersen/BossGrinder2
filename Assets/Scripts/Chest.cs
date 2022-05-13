@@ -7,6 +7,7 @@ public class Chest : MonoBehaviour
     public Transform Origin;
     Animator m_Animator;
     public Potion potion;
+    public Potion speedPotion;
     private bool _triggered;
 
     void Start()
@@ -35,6 +36,13 @@ public class Chest : MonoBehaviour
 
     private void open(){
         Destroy(gameObject);
-        Instantiate(potion, Origin.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+        if (Random.value >= 0.5)
+        {
+            Instantiate(potion, Origin.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(speedPotion, Origin.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+        }
     }
 }
