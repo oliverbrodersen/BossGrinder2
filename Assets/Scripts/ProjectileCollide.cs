@@ -6,6 +6,9 @@ public class ProjectileCollide : MonoBehaviour
 {
     public int damage;
     public bool PlayerOwned;
+
+    public GameObject Blood;
+
     public void SetDamage(int dmg)
     {
         damage = dmg;
@@ -28,7 +31,11 @@ public class ProjectileCollide : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
                 FindObjectOfType<AudioManager>().Play("knife_hit");
+
+                var blood = Instantiate(Blood, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
                 Destroy(gameObject);
+                Destroy(blood, .5f);
                 return;
             }
         }
@@ -41,7 +48,11 @@ public class ProjectileCollide : MonoBehaviour
             {
                 collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
                 FindObjectOfType<AudioManager>().Play("knife_hit");
+
+                var blood = Instantiate(Blood, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
                 Destroy(gameObject);
+                Destroy(blood, .5f);
                 return;
             }
         }
