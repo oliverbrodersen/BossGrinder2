@@ -15,7 +15,6 @@ public class Movement : MonoBehaviour
     public Animator animator;
 
     Vector2 movement;
-    Vector2 mousePosition;
 
     public Tilemap tilemap;
 
@@ -40,8 +39,6 @@ public class Movement : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         movement.Normalize();
 
-        mousePosition = cam.ScreenToViewportPoint(Input.mousePosition);
-
         if (NextDash < Time.time)
         {
             DashIcon.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
@@ -60,7 +57,7 @@ public class Movement : MonoBehaviour
         // Move player
         var movespeed = (Time.time > DashEnd) ? speed : DashSpeed;
         if (Time.time < SpeedBoostEnd)
-            movespeed = DashSpeed;
+            movespeed = speed + 3;
 
         rb.MovePosition(rb.position + movement * movespeed * Time.fixedDeltaTime);
 
@@ -76,10 +73,6 @@ public class Movement : MonoBehaviour
 
         // Set animation parameters
         animator.SetFloat("Speed", movement.SqrMagnitude());
-
-        // Calculate aim direction
-        var delta = mousePosition - rb.position;
-        var angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
     }
 
 }
