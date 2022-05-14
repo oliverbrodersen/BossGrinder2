@@ -85,7 +85,7 @@ public class WaveController : MonoBehaviour
             case 0:
                 return new Vector3(
                 Random.Range(bounds.min.x, bounds.max.x),
-                bounds.max.y,
+                bounds.min.y,
                 Random.Range(bounds.min.z, bounds.max.z));
             case 1:
                 return new Vector3(
@@ -94,13 +94,13 @@ public class WaveController : MonoBehaviour
                 Random.Range(bounds.min.z, bounds.max.z));
             case 2:
                 return new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                bounds.max.y,
+                bounds.min.x,
+                Random.Range(bounds.min.y, bounds.max.y),
                 Random.Range(bounds.min.z, bounds.max.z));
             case 3:
                 return new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                bounds.max.y,
+                bounds.max.x,
+                Random.Range(bounds.min.y, bounds.max.y),
                 Random.Range(bounds.min.z, bounds.max.z));
             default:
                 throw new System.Exception("A square has 4 sides. how did we end up here?");
